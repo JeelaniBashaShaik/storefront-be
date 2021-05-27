@@ -18,9 +18,19 @@ client.connect(err => {
     const usersCollection = db.collection('users');
 
     app.post('/user', (req, res) => {
-        console.log(req.body, 'request body');
         usersCollection.insertOne({ timestamp: new Date(), ...req.body }, ((err, result) => {
-            res.send('ok');
+            res.send({success: true});
+           }));
+      }) 
+
+      app.get('/user', (req, res) => {
+        usersCollection.findOne({userEmail: req.body.userEmail}, ((err, result) => {
+          if (result) {
+            res.send({success: true, ...result});
+          } else {
+            res.send({success: false});
+          }
+            
            }));
       })
 });
