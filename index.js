@@ -23,14 +23,13 @@ client.connect(err => {
            }));
       }) 
 
-      app.get('/user', (req, res) => {
-        usersCollection.findOne({userEmail: req.body.userEmail}, ((err, result) => {
+      app.get('/user/:email', (req, res) => {
+        usersCollection.findOne({userEmail: req.params.email}, ((err, result) => {
           if (result) {
             res.send({success: true, ...result});
           } else {
             res.send({success: false});
           }
-            
            }));
       })
 });
