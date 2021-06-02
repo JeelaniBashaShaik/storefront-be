@@ -6,7 +6,8 @@ const userJoiSchema = Joi.object().keys({
     userRole: Joi.string().required(),
     userPrimaryNumber: Joi.string().required(),
     userSecondaryNumber: Joi.string(),
-    userAddress: Joi.string().required()
+    userAddress: Joi.string(),
+    userPassword: Joi.string().required()
 });
 
 module.exports = {
