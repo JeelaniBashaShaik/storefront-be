@@ -10,6 +10,19 @@ const userJoiSchema = Joi.object().keys({
     userPassword: Joi.string().required()
 });
 
+const storefrontInventoryJoiSchema = Joi.object().keys({
+    skuId: Joi.string().required(),
+    skuName: Joi.string().required(),
+    skuDescription: Joi.string().required(),
+    skuImageUrl: Joi.string(),
+    skuMeasure: Joi.string().required(),
+    skuTags: Joi.string().required(),
+    skuPricePerMeasure: Joi.string(),
+    skuCategory: Joi.string().required(),
+    skuVisible: Joi.string()
+})
+
 module.exports = {
     userJoiSchema,
+    storefrontInventoryJoiSchema
 }

@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const config = require('./config');
+const joiSchemas = require('./joiSchemas');
 
 const joiValidate = (schema, data) => {
     const { error } = schema.validate(data);
@@ -18,7 +19,7 @@ const sendResponse = (response, payload = {}, errorMessage = '') => {
 }
 
 const verifyToken = (request, response, next) => {
-    if (request.url === '/start/login' || request.url === '/start/register') {
+    if (config.bypassEndpoints.includes(request.url)) {
         next(); // bypass for login route and register
     } else {
         let token = request.headers['x-access-token'];
@@ -36,8 +37,24 @@ const verifyToken = (request, response, next) => {
     }
 }
 
+const validateSku = (skuList) => {
+    let errorRows = [];
+    let successRows = [];
+    skuList.forEach((sku, index) => {
+        const { hasError, errorMessage } = joiValidate(joiSchemas.storefrontInventoryJoiSchema, sku);
+        if (hasError) {
+            errorRows.push({skuId: sku.skuId, skuName: sku.skuName, errorMessage, row: index + 1});
+        } else {
+            sku.skuTags = sku.skuTags.split(',');
+            successRows.push({...sku});
+        }
+    });
+    return {errorRows, successRows};
+}
+
 module.exports = {
     joiValidate,
     sendResponse,
-    verifyToken
+    verifyToken,
+    validateSku
 }
