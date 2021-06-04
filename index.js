@@ -28,7 +28,7 @@ app.get('/test', function (req, res) {
   res.send({testKey: 'test value'});
 })
 
-// app.use(utilities.verifyToken);
+app.use(utilities.verifyToken);
 app.use(fileUpload());
 app.use('/start', loginRoutes);
 app.use('/user', userRoutes);

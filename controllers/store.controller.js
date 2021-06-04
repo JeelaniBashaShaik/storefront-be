@@ -1,5 +1,5 @@
 const Store = require('./../models/store.model');
-const joiSchemas = require('./../joischemas');
+const joiSchemas = require('./../joiSchemas');
 const utilities = require('./../utilities');
 
 const addStore = (request, response) => {
