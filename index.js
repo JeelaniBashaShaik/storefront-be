@@ -5,6 +5,7 @@ const fileUpload = require('express-fileupload');
 const loginRoutes = require('./routes/login.routes.js');
 const userRoutes = require('./routes/user.routes');
 const storefrontRoutes = require('./routes/storefront.routes');
+const storeRoutes = require('./routes/store.routes');
 
 const utilities = require('./utilities');
 
@@ -31,6 +32,7 @@ app.get('/test', function (req, res) {
 app.use(fileUpload());
 app.use('/start', loginRoutes);
 app.use('/user', userRoutes);
+app.use('/store', storeRoutes);
 app.use('/storefront', storefrontRoutes);
 
 app.listen(process.env.PORT || 5000, () => console.log(process.env.PORT, 'server started'));

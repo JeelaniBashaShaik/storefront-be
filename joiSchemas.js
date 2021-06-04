@@ -20,9 +20,22 @@ const storefrontInventoryJoiSchema = Joi.object().keys({
     skuPricePerMeasure: Joi.string(),
     skuCategory: Joi.string().required(),
     skuVisible: Joi.string()
+});
+
+const store = Joi.object().keys({
+    storeId: Joi.string().required(),
+    storeName: Joi.string().required(),
+    storePrimaryNumber: Joi.number().required(),
+    storeSecondaryNumber: Joi.number(),
+    storeEmail: Joi.string().required(),
+    storeImageUrl: Joi.string(),
+    storeAddress: Joi.string().required(),
+    storeType: Joi.string().required(),
+    storePincode: Joi.string().required()
 })
 
 module.exports = {
     userJoiSchema,
-    storefrontInventoryJoiSchema
+    storefrontInventoryJoiSchema,
+    store
 }
