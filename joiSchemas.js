@@ -25,13 +25,14 @@ const storefrontInventoryJoiSchema = Joi.object().keys({
 const store = Joi.object().keys({
     storeId: Joi.string().required(),
     storeName: Joi.string().required(),
-    storePrimaryNumber: Joi.number().required(),
-    storeSecondaryNumber: Joi.number(),
+    storePrimaryNumber: Joi.string().required(),
+    storeSecondaryNumber: Joi.string(),
     storeEmail: Joi.string().required(),
     storeImageUrl: Joi.string(),
     storeAddress: Joi.string().required(),
     storeType: Joi.string().required(),
-    storePincode: Joi.string().required()
+    storePincode: Joi.string().required(),
+    userLinkedNumber: Joi.string().required()
 })
 
 module.exports = {

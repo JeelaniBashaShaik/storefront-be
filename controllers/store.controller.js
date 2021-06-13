@@ -58,11 +58,22 @@ const getAllStores = async (request, response)  => {
     }
 }
 
+const getUserStores = async (request, response) => {
+    const userLinkedNumber = request.params.userLinkedNumber;
+    const allStores = await Store.find({userLinkedNumber});
+    if (allStores.length) {
+        utilities.sendResponse(response, allStores);
+    } else {
+        utilities.sendResponse(response, {}, 'stores-fetch-error');
+    }
+}
+
 
 module.exports = {
     addStore,
     getStore,
     updateStore,
     deleteStore,
-    getAllStores
+    getAllStores,
+    getUserStores
 }
